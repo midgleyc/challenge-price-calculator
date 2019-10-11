@@ -14,7 +14,12 @@ namespace Library.PriceCalculator.Parsing
         }
 
         public ICollection<Item> ParseBasket(IEnumerable<string> input) {
-            return new List<Item>();
+            var items = new List<Item>();
+            foreach (var inputItem in input) {
+                var price = _inventory.GetPriceFor(inputItem);
+                items.Add(new Item(inputItem) {Price = price});
+            }
+            return items;
         }
     }
 }

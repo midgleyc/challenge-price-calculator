@@ -2,8 +2,13 @@ namespace Library.PriceCalculator.Contract
 {
     public class Item
     {
-        public string Identifier {get; set;}
+        public Item(string identifier)
+        {
+            Identifier = identifier;
+        }
 
-        public decimal Price {get; set;}
+        public string Identifier { get; }
+
+        public decimal Price { get; set; }
     }
 }

@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using FluentAssertions;
 using Library.PriceCalculator.Contract;
 using Library.PriceCalculator.Parsing;
@@ -11,20 +13,42 @@ namespace Library.PriceCalculator.Tests
         [TestMethod]
         public void NothingPassedIsEmpty()
         {
-            var basketParser = new BasketParser(CreateInventory());
+            var basketParser = CreateBasketParser();
             var output = basketParser.ParseBasket(new string[] {});
             output.Should().BeEmpty();
+        }
+
+        [TestMethod]
+        public void InventoryPassedItemIsPresent()
+        {
+            var basketParser = CreateBasketParser();
+            var output = basketParser.ParseBasket(new string[] {"Present"});
+            var present = output.Should().ContainSingle().Subject;
+            present.Identifier.Should().Be("Present");
+            present.Price.Should().Be(11.12m);
         }
 
         private IInventory CreateInventory() {
             return new TestInventory();
         }
 
+        private BasketParser CreateBasketParser() {
+            return new BasketParser(CreateInventory());
+        }
+
         private class TestInventory : IInventory
         {
+            private readonly Dictionary<string, decimal> priceMapping = new Dictionary<string, decimal> {
+                {"Present", 11.12m},
+            };
+
             public decimal GetPriceFor(string itemName)
             {
-                throw new System.NotImplementedException();
+                if (priceMapping.TryGetValue(itemName, out var price)) {
+                    return price;
+                } else {
+                    throw new InvalidOperationException($"Item {itemName} not in inventory");
+                }
             }
         }
     }
