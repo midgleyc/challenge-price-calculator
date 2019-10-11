@@ -18,7 +18,7 @@ namespace Service.PriceCalculator
                 Console.WriteLine("Could not parse input:");
                 retCode = 1;
                 foreach (var error in failed) {
-                    Console.WriteLine(error.Message);
+                    Console.WriteLine($"Item {error} not in inventory");
                 }
             }
             Console.WriteLine("Parsed items:");
