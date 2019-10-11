@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Library.PriceCalculator\Library.PriceCalculator.csproj" />
+    <ProjectReference Include="..\..\src\Library.PriceCalculator.Contract\Library.PriceCalculator.Contract.csproj" />
   </ItemGroup>
 
 </Project>
