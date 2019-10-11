@@ -13,13 +13,9 @@ namespace Library.PriceCalculator.Resources
             {"Apple", 1.00m},
         };
 
-        public decimal GetPriceFor(string itemName)
+        public bool TryGetPriceFor(string itemName, out decimal price)
         {
-            if (priceMapping.TryGetValue(itemName, out var price)) {
-                return price;
-            } else {
-                throw new InvalidOperationException($"Item {itemName} not in inventory");
-            }
+            return priceMapping.TryGetValue(itemName, out price);
         }
     }
 }
