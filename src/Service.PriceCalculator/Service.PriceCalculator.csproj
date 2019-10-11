@@ -1,5 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <ItemGroup>
+    <ProjectReference Include="..\Library.PriceCalculator\Library.PriceCalculator.csproj" />
+    <ProjectReference Include="..\Library.PriceCalculator.Resources\Library.PriceCalculator.Resources.csproj" />
+  </ItemGroup>
+
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
