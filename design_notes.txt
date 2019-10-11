@@ -1,0 +1,23 @@
+These are my transcribed paper notes from before I started writing any code, trying to get a good handle on what architecture I was going for. Let's see how close they are to the final thing!
+
+On the console flow:
+
+|
+V
+new Pricing(Inventory, Offers)
+parse input, error <- (list<string> -> list<item>) -- BasketParser(Inventory)
+subtotal, discounts = pricing.CalculatePrice(list<item>)
+for line in TotalFormatter.Format(subtotal, discounts):
+  Console.Writeline(line)
+
+
+on interfaces and contracts:
+
+CalculatePrice(List<item>, List<Offer>)
+TotalFormatter(subtotal, List<Discount>) -> List<String>
+Item: id, price
+
+IInventory as injectable, GetPriceFor(string)
+IOffers
+IDiscount: id, base, num
+Offer: Applies (Func<int>), ApplyDiscount (Func - return IDiscount)
