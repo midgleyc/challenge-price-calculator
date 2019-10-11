@@ -1,7 +1,7 @@
+using FluentAssertions;
 using Library.PriceCalculator.Contract;
 using Library.PriceCalculator.Parsing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
 
 namespace Library.PriceCalculator.Tests
 {
@@ -13,7 +13,7 @@ namespace Library.PriceCalculator.Tests
         {
             var basketParser = new BasketParser(CreateInventory());
             var output = basketParser.ParseBasket(new string[] {});
-            Assert.IsFalse(output.Any());
+            output.Should().BeEmpty();
         }
 
         private IInventory CreateInventory() {
