@@ -14,12 +14,17 @@ namespace Library.PriceCalculator.Parsing
         }
 
         public ICollection<Item> ParseBasket(IEnumerable<string> input) {
+            return ParseBasket(input, out var _);
+        }
+
+        public ICollection<Item> ParseBasket(IEnumerable<string> input, out List<Exception> failed) {
             var items = new List<Item>();
-            var failed = new List<Exception>();
+            failed = new List<Exception>();
             foreach (var inputItem in input) {
                 if (_inventory.TryGetPriceFor(inputItem, out var price)) {
                     items.Add(new Item(inputItem) {Price = price});
                 } else {
+                    // TODO: maybe something better than exception? only using as strings, really.
                     failed.Add(new InvalidOperationException($"Item {inputItem} not in inventory"));
                 }
             }
