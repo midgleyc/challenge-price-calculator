@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Library.PriceCalculator\Library.PriceCalculator.csproj" />
+    <ProjectReference Include="..\Library.PriceCalculator.Contract\Library.PriceCalculator.Contract.csproj" />
     <ProjectReference Include="..\Library.PriceCalculator.Resources\Library.PriceCalculator.Resources.csproj" />
   </ItemGroup>
 
