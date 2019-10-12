@@ -14,7 +14,7 @@ namespace Library.PriceCalculator.Tests
         public void NothingPassedIsEmpty()
         {
             var basketParser = CreateBasketParser();
-            var output = basketParser.ParseBasket(new string[] {}, out var failed);
+            var output = basketParser.ParseBasket(new string[] { }, out var failed);
             output.Should().BeEmpty();
             failed.Should().BeEmpty();
         }
@@ -23,7 +23,7 @@ namespace Library.PriceCalculator.Tests
         public void InventoryPassedItemIsPresent()
         {
             var basketParser = CreateBasketParser();
-            var output = basketParser.ParseBasket(new string[] {"Present"}, out var failed);
+            var output = basketParser.ParseBasket(new string[] { "Present" }, out var failed);
             var present = output.Should().ContainSingle().Subject;
             present.Identifier.Should().Be("Present");
             present.Price.Should().Be(11.12m);
@@ -34,7 +34,7 @@ namespace Library.PriceCalculator.Tests
         public void InventoryNotPassedItemIsAbsent()
         {
             var basketParser = CreateBasketParser();
-            var output = basketParser.ParseBasket(new string[] {"Absent"}, out var failed);
+            var output = basketParser.ParseBasket(new string[] { "Absent" }, out var failed);
             output.Should().BeEmpty();
             failed.Should().ContainSingle().Subject.Should().Equals("Absent");
         }
@@ -43,7 +43,7 @@ namespace Library.PriceCalculator.Tests
         public void ParseCanContainDuplicates()
         {
             var basketParser = CreateBasketParser();
-            var output = basketParser.ParseBasket(new string[] {"Present", "Present", "Present"}, out var failed);
+            var output = basketParser.ParseBasket(new string[] { "Present", "Present", "Present" }, out var failed);
             output.Should().HaveCount(3);
             var present = output.Last();
             present.Identifier.Should().Be("Present");
@@ -55,7 +55,7 @@ namespace Library.PriceCalculator.Tests
         public void ParseContainsAsMuchAsPossible()
         {
             var basketParser = CreateBasketParser();
-            var output = basketParser.ParseBasket(new string[] {"Present", "Absent", "Present2", "Absent2"}, out var failed);
+            var output = basketParser.ParseBasket(new string[] { "Present", "Absent", "Present2", "Absent2" }, out var failed);
             output.Should().HaveCount(2);
             var present = output.Should().Contain(i => i.Identifier == "Present").Subject;
             present.Price.Should().Be(11.12m);
@@ -64,11 +64,13 @@ namespace Library.PriceCalculator.Tests
             failed.Should().HaveCount(2);
         }
 
-        private IInventory CreateInventory() {
+        private IInventory CreateInventory()
+        {
             return new TestInventory();
         }
 
-        private BasketParser CreateBasketParser() {
+        private BasketParser CreateBasketParser()
+        {
             return new BasketParser(CreateInventory());
         }
 

@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Library.PriceCalculator.Contract
 {
     public class Discount

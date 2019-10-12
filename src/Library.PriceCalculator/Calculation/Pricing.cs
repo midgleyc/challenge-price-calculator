@@ -13,7 +13,8 @@ namespace Library.PriceCalculator.Calculation
             _offers = offers;
         }
 
-        public Price CalculatePrice(IEnumerable<Item> items) {
+        public Price CalculatePrice(IEnumerable<Item> items)
+        {
             return new Price(0.0m);
         }
     }
