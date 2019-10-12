@@ -1,0 +1,6 @@
+#!/bin/bash
+
+(
+cd src/Service.PriceCalculator
+dotnet run $@
+)
