@@ -4,11 +4,11 @@ using Library.PriceCalculator.Contract;
 
 namespace Library.PriceCalculator.Calculation
 {
-    public class PriceCalculator
+    public class Pricing
     {
         private IOffers _offers;
 
-        public PriceCalculator(IOffers offers)
+        public Pricing(IOffers offers)
         {
             _offers = offers;
         }

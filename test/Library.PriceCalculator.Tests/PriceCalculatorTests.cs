@@ -22,8 +22,8 @@ namespace Library.PriceCalculator.Tests
             return new TestOffers();
         }
 
-        private PriceCalculator.Calculation.PriceCalculator CreatePriceCalculator() {
-            return new PriceCalculator.Calculation.PriceCalculator(CreateOffers());
+        private Pricing CreatePriceCalculator() {
+            return new Pricing(CreateOffers());
         }
 
         private class TestOffers : IOffers
