@@ -9,6 +9,7 @@ You could choose to accept aliases for products -- e.g. allowing both "Apple" an
 What exactly to do in the case of invalid input was unspecified. I identified two main possibilities: 
 * parse as much as possible, note the ones you failed to parse, and then continue with the ones that are correct
 * parse as much as possible, note the ones you failed to parse, then abort, instructing the caller to get it right next time
+
 I think the latter is better -- folk don't necessarily check log messages, and misspelling a high-ticket item could lead to a substantially different output than desired. It's more important to get the right answer than to get any answer. You could also abort on the first error, but I think it's kinder to do as much as possible (even though this is slightly slower to return).
 
 The behaviour on the case of an empty basket was unspecified. I decided to treat it as valid.
@@ -63,8 +64,9 @@ The source is arranged into one service (the console app) and three libraries: t
 * first, parse the input
 * second, calculate the total price and applied discounts
 * third, print the output
+
 Early on, I considered inlining the output class into the console app, but as I had to make some assumptions about the formatting in certain cases I decided it would be better outside. I designed which classes I wanted before I started coding and mostly stuck to that, but some contracts, such as `IOffers`, weren't decided until quite late.
 
 I considered having IOffers have the contract of `ICollection<Discount> CheckDiscounts(IEnumerable<Item> items);`. I decided against it as this means the business logic goes in the resource assembly -- I wanted a degree of separation there. Determining the subtotal and computing the discounts could be separate classes, but as the first is one line I thought it was fair enough to have them together -- the intent is clear.
 
-While writing the tests for discounts, I reconsidered my "Item is id and price idea". We'd expect all items of the same type to have the same price, so we shouldn't need to specify it for every item. However, we still might (see the discount section) need to apply discounts to a single item. Using the identifier to look up the price in an associated globally accessible dictionary is a possibility. I feel at the very least prices should be constant inside any single call. I think any changes here would be premature until I have a better understanding of the totality of the requirements.
+While writing the tests for discounts, I reconsidered my "Item is id and price" idea. We'd expect all items of the same type to have the same price, so we shouldn't need to specify it for every item. However, we still might (see the discount section) need to apply discounts to a single item. Using the identifier to look up the price in an associated globally accessible dictionary is a possibility. I feel at the very least prices should be constant inside any single call. I think any changes here would be premature until I have a better understanding of the totality of the requirements.
