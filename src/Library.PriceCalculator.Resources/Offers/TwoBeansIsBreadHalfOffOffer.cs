@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Library.PriceCalculator.Contract;
+using static Library.PriceCalculator.Resources.Identifiers;
 
 namespace Library.PriceCalculator.Resources
 {
@@ -9,8 +10,8 @@ namespace Library.PriceCalculator.Resources
     {
         public bool TryApplyDiscount(ICollection<Item> items, out Discount discount)
         {
-            var beans = items.Where(i => i.Identifier == "Beans").ToList();
-            var bread = items.Where(i => i.Identifier == "Bread").ToList();
+            var beans = items.Where(i => i.Identifier == Beans).ToList();
+            var bread = items.Where(i => i.Identifier == Bread).ToList();
             if (beans.Count >= 2 && bread.Count >= 1)
             {
                 // assume all bread loaves have the same price

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Library.PriceCalculator.Contract;
+using static Library.PriceCalculator.Resources.Identifiers;
 
 namespace Library.PriceCalculator.Resources
 {
@@ -8,7 +9,7 @@ namespace Library.PriceCalculator.Resources
     {
         public bool TryApplyDiscount(ICollection<Item> items, out Discount discount)
         {
-            var apples = items.Where(i => i.Identifier == "Apple").ToList();
+            var apples = items.Where(i => i.Identifier == Apple).ToList();
             if (apples.Any())
             {
                 // assume all apples have the same price
