@@ -19,9 +19,9 @@ The behaviour on the case of an empty basket was unspecified. I decided to treat
 The output in case of multiple applications of the same discount was unspecified. For example, suppose you buy three apples, and apples are 10% off. Should the discount portion of the output be:
 * 3x Apples 10% off: -30p
 * Apples 10% off: -30p
-* Apples 10% off: -10p
-  Apples 10% off: -10p
-  Apples 10% off: -10p
+* Apples 10% off: -10p<br>
+ Apples 10% off: -10p<br>
+ Apples 10% off: -10p
 * something else entirely?
 
 I decided to duplicate the discount -- that seems to be the most common behaviour on receipts.
