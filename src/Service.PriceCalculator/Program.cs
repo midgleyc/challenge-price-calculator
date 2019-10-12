@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Library.PriceCalculator.Calculation;
 using Library.PriceCalculator.Contract;
 using Library.PriceCalculator.Parsing;
 using Library.PriceCalculator.Resources;
@@ -28,6 +29,9 @@ namespace Service.PriceCalculator
             {
                 Console.WriteLine($"Item {item.Identifier} with price {item.Price}");
             }
+            var pricing = new Pricing(new Offers());
+            var price = pricing.CalculatePrice(items);
+            Console.WriteLine($"Price: {price.Total}");
             return retCode;
         }
     }
