@@ -4,6 +4,6 @@ namespace Library.PriceCalculator.Contract
 {
     public interface IOffer
     {
-        Discount CheckDiscount(IEnumerable<Item> items);
+        bool TryApplyDiscount(IEnumerable<Item> items, out Discount discount);
     }
 }
