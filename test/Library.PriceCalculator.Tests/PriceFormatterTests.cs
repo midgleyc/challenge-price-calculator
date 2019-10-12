@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using FluentAssertions;
 using Library.PriceCalculator.Contract;
 using Library.PriceCalculator.Formatter;

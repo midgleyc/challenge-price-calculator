@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using Library.PriceCalculator.Contract;
-
 namespace Library.PriceCalculator.Resources
 {
     public static class Identifiers

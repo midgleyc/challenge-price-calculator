@@ -1,7 +1,6 @@
 using System.Linq;
 using System.Collections.Generic;
 using Library.PriceCalculator.Contract;
-using System;
 
 namespace Library.PriceCalculator.Formatter
 {
