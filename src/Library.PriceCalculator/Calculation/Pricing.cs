@@ -14,19 +14,14 @@ namespace Library.PriceCalculator.Calculation
             _offers = offers;
         }
 
-        public Price CalculatePrice(IEnumerable<Item> items)
-        {
-            return CalculatePrice(items.ToList());
-        }
-
-        private Price CalculatePrice(List<Item> items)
+        public Price CalculatePrice(ICollection<Item> items)
         {
             var subTotal = items.Sum(i => i.Price);
             var discounts = ComputeDiscounts(items);
             return new Price(subTotal, discounts);
         }
 
-        private IEnumerable<Discount> ComputeDiscounts(List<Item> items)
+        private IEnumerable<Discount> ComputeDiscounts(ICollection<Item> items)
         {
             var discounts = new List<Discount>();
             foreach (var offer in _offers.GetOffers())

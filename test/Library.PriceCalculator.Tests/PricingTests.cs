@@ -104,7 +104,7 @@ namespace Library.PriceCalculator.Tests
 
         private class AlwaysOffer : IOffer
         {
-            public bool TryApplyDiscount(IEnumerable<Item> items, out Discount discount)
+            public bool TryApplyDiscount(ICollection<Item> items, out Discount discount)
             {
                 discount = new Discount("Always", 0.10m, 1);
                 return true;
@@ -113,7 +113,7 @@ namespace Library.PriceCalculator.Tests
 
         private class NeverOffer : IOffer
         {
-            public bool TryApplyDiscount(IEnumerable<Item> items, out Discount discount)
+            public bool TryApplyDiscount(ICollection<Item> items, out Discount discount)
             {
                 discount = null;
                 return false;
@@ -122,9 +122,8 @@ namespace Library.PriceCalculator.Tests
 
         private class TestOffer : IOffer
         {
-            public bool TryApplyDiscount(IEnumerable<Item> items, out Discount discount)
+            public bool TryApplyDiscount(ICollection<Item> items, out Discount discount)
             {
-                items = items.ToList();
                 var testItems = items.Where(i => i.Identifier == "Test").ToList();
                 if (testItems.Any())
                 {
