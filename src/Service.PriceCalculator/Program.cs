@@ -14,7 +14,7 @@ namespace Service.PriceCalculator
         static int Main(string[] args)
         {
             var basketParser = new BasketParser(new Inventory());
-            ICollection<Item> items = basketParser.ParseBasket(args, out var failed);
+            var (items, failed) = basketParser.ParseBasket(args);
             if (failed.Any())
             {
                 Console.WriteLine("Could not parse input:");
