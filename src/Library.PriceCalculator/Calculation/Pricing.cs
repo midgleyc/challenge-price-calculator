@@ -1,4 +1,4 @@
-using System;
+using System.Linq;
 using System.Collections.Generic;
 using Library.PriceCalculator.Contract;
 
@@ -15,7 +15,7 @@ namespace Library.PriceCalculator.Calculation
 
         public Price CalculatePrice(IEnumerable<Item> items)
         {
-            return new Price(0.0m);
+            return new Price(items.Sum(i => i.Price));
         }
     }
 }

@@ -13,6 +13,7 @@ namespace Library.PriceCalculator.Contract
         {
             SubTotal = subTotal;
             Discounts = discounts;
+            Total = subTotal - discounts.Sum(d => d.BaseAmount * d.TimesApplied);
         }
 
         public decimal SubTotal { get; }

@@ -13,9 +13,25 @@ namespace Library.PriceCalculator.Tests
         [TestMethod]
         public void NothingPassedHasNoCost()
         {
-            var priceCalculator = CreatePriceCalculator();
+            var priceCalculator = CreatePriceCalculatorWithNoOffers();
             var output = priceCalculator.CalculatePrice(new Item[] { });
             output.Total.Should().Be(0.0m);
+        }
+
+        [TestMethod]
+        public void OneThingPassedHasThatCost()
+        {
+            var priceCalculator = CreatePriceCalculatorWithNoOffers();
+            var output = priceCalculator.CalculatePrice(new Item[] { ItemWithPrice(1.23m) });
+            output.SubTotal.Should().Be(1.23m);
+        }
+
+        [TestMethod]
+        public void ManyThingsPassedSumsCost()
+        {
+            var priceCalculator = CreatePriceCalculatorWithNoOffers();
+            var output = priceCalculator.CalculatePrice(new Item[] { ItemWithPrice(1.23m), ItemWithPrice(2.34m), ItemWithPrice(3.45m, "Other")});
+            output.SubTotal.Should().Be(7.02m);
         }
 
         private IOffers CreateOffers()
@@ -23,9 +39,14 @@ namespace Library.PriceCalculator.Tests
             return new TestOffers();
         }
 
-        private Pricing CreatePriceCalculator()
+        private Pricing CreatePriceCalculatorWithNoOffers()
         {
             return new Pricing(CreateOffers());
+        }
+
+        private static Item ItemWithPrice(decimal price, string id = "Test")
+        {
+            return new Item("Test") { Price = price };
         }
 
         private class TestOffers : IOffers
