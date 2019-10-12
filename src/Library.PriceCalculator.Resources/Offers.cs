@@ -5,7 +5,7 @@ namespace Library.PriceCalculator.Resources
 {
     public class Offers : IOffers
     {
-        private readonly List<IOffer> offers = new List<IOffer> { };
+        private readonly List<IOffer> offers = new List<IOffer> { new AppleTenPercentDiscountOffer(), new TwoBeansIsBreadHalfOffOffer() };
 
         public ICollection<IOffer> GetOffers()
         {
