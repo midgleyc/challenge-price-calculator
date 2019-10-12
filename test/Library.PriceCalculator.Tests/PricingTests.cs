@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Library.PriceCalculator.Tests
 {
     [TestClass]
-    public class PriceCalculatorTests
+    public class PricingTests
     {
         [TestMethod]
         public void NothingPassedHasNoCost()
@@ -30,7 +30,7 @@ namespace Library.PriceCalculator.Tests
         public void ManyThingsPassedSumsCost()
         {
             var priceCalculator = CreatePriceCalculatorWithNoOffers();
-            var output = priceCalculator.CalculatePrice(new Item[] { ItemWithPrice(1.23m), ItemWithPrice(2.34m), ItemWithPrice(3.45m, "Other")});
+            var output = priceCalculator.CalculatePrice(new Item[] { ItemWithPrice(1.23m), ItemWithPrice(2.34m), ItemWithPrice(3.45m, "Other") });
             output.SubTotal.Should().Be(7.02m);
         }
 
@@ -51,6 +51,21 @@ namespace Library.PriceCalculator.Tests
 
         private class TestOffers : IOffers
         {
+            private List<IOffer> _offers;
+
+            public TestOffers() : this(Enumerable.Empty<IOffer>())
+            {
+            }
+
+            public TestOffers(IEnumerable<IOffer> offers)
+            {
+                _offers = offers.ToList();
+            }
+
+            public ICollection<IOffer> GetOffers()
+            {
+                return _offers;
+            }
         }
     }
 }

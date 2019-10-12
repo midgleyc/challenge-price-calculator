@@ -2,8 +2,8 @@ using System.Collections.Generic;
 
 namespace Library.PriceCalculator.Contract
 {
-    public interface IOffers
+    public interface IOffer
     {
-        ICollection<IOffer> GetOffers();
+        Discount CheckDiscount(IEnumerable<Item> items);
     }
 }
