@@ -58,6 +58,8 @@ Inventory is quite simple -- each item is an identifier combined with a price. P
 
 Offers are substantially more complicated. I think a simple solution would be to provide an "OfferFactory" in Resources that accepts an identifier and returns an Offer, and then read from a configuration file the identifiers of offers that are currently active. This requires that all offers be present in the OfferFactory: you could acquire a bit more freedom by adding some abstraction -- if there's a class for "10% off apples", you know what the class for "20% off bread" looks like -- but going down this road would eventually want you to implement some sort of DSL. 
 
+To reduce the necessary frequency of deployments, you could add feature flags (or date checking, or some other equivalent mechanism) to the offer objects, so that you could add an offer to the configuration file that would not be valid until the feature flag was toggled to true (or the date progressed to the appropriate range).
+
 # Design notes
 
 The source is arranged into one service (the console app) and three libraries: the base, which contains the logic; `Contract`, which contains interfaces and POCOs; and `Resources`, which contains implementations of the Inventory and Offers. Classes in base were determined by looking at the flow of logic in the console app and looking for logical separation: 
